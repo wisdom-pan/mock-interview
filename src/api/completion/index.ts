@@ -16,10 +16,10 @@ const fetchOpenAICompletion = async ({
 
   const prompt = generatePrompt(field, experience, lang, question, transcript);
   const options = {
-    model: 'text-davinci-003',
-    prompt,
+    model: 'gpt-3.5-turbo-16k-0613',
+    messages: [{ role: "user", content: prompt }],
     temperature: 0.7,
-    max_tokens: 1000,
+    max_tokens: 2048,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
@@ -30,10 +30,10 @@ const fetchOpenAICompletion = async ({
     },
   };
 
-  const { data } = await instance.post('v1/completions', options, config);
+  const { data } = await instance.post('v1/chat/completions', options, config);
 
-  const response = data.choices[0].text.trim();
-
+  const response = data.choices[0].message.content.trim();
+  console.log('**********response*******', data)
   return {
     id: data.id,
     response,
