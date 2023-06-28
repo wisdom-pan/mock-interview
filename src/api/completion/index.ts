@@ -16,10 +16,9 @@ const fetchOpenAICompletion = async ({
 
   const prompt = generatePrompt(field, experience, lang, question, transcript);
   const options = {
-    model: 'gpt-3.5-turbo-16k-0613',
+    model: 'gpt-3.5-turbo-0613',
     messages: [{ role: "user", content: prompt }],
     temperature: 0.7,
-    max_tokens: 2048,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
